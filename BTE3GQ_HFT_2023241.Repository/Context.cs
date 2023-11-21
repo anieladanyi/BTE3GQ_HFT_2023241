@@ -11,39 +11,44 @@ namespace BTE3GQ_HFT_2023241.Repository
     {
         public DbSet<Player> Players { get; set; }
         public DbSet<League> Leagues { get; set; }
-        public DbSet<Team> Teamss { get; set; }
+        public DbSet<Team> Teams { get; set; }
+
+        public Context()
+        {
+            this.Database.EnsureCreated();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string conn = @"";
-                //optionsBuilder.UseLazyLoadingProxies().UseSqlServers(conn);
+                //string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\football.mdf;Integrated Security=True;MultipleActiveResultSets=true";
+                optionsBuilder.UseLazyLoadingProxies().UseInMemoryDatabase("out");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<League>(League => League
-                .HasOne(League => League.Teams)
-                .WithMany(Teams => Teams.Leagues)
-                .HasForeignKey(League => League.TeamsId)
-                .OnDelete(DeleteBehavior.Cascade));
+            //modelBuilder.Entity<League>(League => League
+            //    .HasOne(League => League.Teams)
+            //    .WithMany(Teams => Teams.Leagues)
+            //    .HasForeignKey(League => League.TeamsId)
+            //    .OnDelete(DeleteBehavior.Cascade));
 
-            modelBuilder.Entity<Player>()
-                .HasMany(x => x.Leagues)
-                .WithMany(x => x.Players)
-                .UsingEntity<Role>(
-                    x => x.HasOne(x => x.League)
-                        .WithMany().HasForeignKey(x => x.LeagueId).OnDelete(DeleteBehavior.Cascade),
-                    x => x.HasOne(x => x.Player)
-                        .WithMany().HasForeignKey(x => x.PlayerId).OnDelete(DeleteBehavior.Cascade));
+            //modelBuilder.Entity<Player>()
+            //    .HasMany(x => x.Leagues)
+            //    .WithMany(x => x.Players)
+            //    .UsingEntity<Role>(
+            //        x => x.HasOne(x => x.League)
+            //            .WithMany().HasForeignKey(x => x.LeagueId).OnDelete(DeleteBehavior.Cascade),
+            //        x => x.HasOne(x => x.Player)
+            //            .WithMany().HasForeignKey(x => x.PlayerId).OnDelete(DeleteBehavior.Cascade));
 
-            modelBuilder.Entity<Team>()
-                .HasOne(r => r.Player)
-                .WithMany(Player => Player.Roles)
-                .HasForeignKey(r => r.PlayerId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<Team>()
+            //    .HasOne(r => r.Player)
+            //    .WithMany(Player => Player.Roles)
+            //    .HasForeignKey(r => r.PlayerId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<League>().HasData(new League[]
             {
@@ -86,7 +91,7 @@ namespace BTE3GQ_HFT_2023241.Repository
                 new Player("16,5,Manuel Neuer,GK,193,BOTH,37"),
                 new Player("17,6,Bruno Guimarães,M(C),182,RIGHT,25"),
                 new Player("18,6,Kieran Trippier,M(RL),177,RIGHT,33"),
-                new Player("19S,6,ven Botman,D(C),195,LEFT,23"),
+                new Player("19,6,ven Botman,D(C),195,LEFT,23"),
                 new Player("20,7,Mats Hummels,D(C),191,RIGHT,34"),
                 new Player("21,7,Niklas Süle,D(RC),195,RIGHT,28"),
                 new Player("22,7,Marcel Sabitzer,AM(RLC),177,RIGHT,29"),

@@ -14,7 +14,7 @@ namespace BTE3GQ_HFT_2023241.Models
         public int TeamID { get; set; }
         public string Name { get; set; }
         public int SquadDepth { get; set; }
-        public ICollection<Player> Players { get; set; }
+        public virtual ICollection<Player> Players { get; set; }
         public int LeagueID { get; set; }
         public Team()
         {
