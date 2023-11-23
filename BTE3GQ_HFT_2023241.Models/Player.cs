@@ -10,8 +10,11 @@ namespace BTE3GQ_HFT_2023241.Models
 {
     public class Player
     {
+        [Key]
         public int PlayerID { get; set; }
+        [ForeignKey("TeamId")]
         public int TeamID { get; set; }
+        public virtual Team Team { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
         public int Height { get; set; }
@@ -19,7 +22,7 @@ namespace BTE3GQ_HFT_2023241.Models
         public int Age { get; set; }
         public Player()
         {
-            
+
         }
         public Player(string info)
         {

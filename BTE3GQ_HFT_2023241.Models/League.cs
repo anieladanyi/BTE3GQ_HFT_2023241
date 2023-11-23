@@ -13,6 +13,7 @@ namespace BTE3GQ_HFT_2023241.Models
     public class League
     {
         public virtual ICollection<Team> Teams { get; set; }
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string LeaguesNation { get; set; }

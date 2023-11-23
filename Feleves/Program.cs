@@ -12,6 +12,7 @@ namespace Feleves
             Context context = new Context();
             
             var items = context.Players.ToArray();
+            var ucls = context.UCLs.ToArray();
             ;
         }
     }
