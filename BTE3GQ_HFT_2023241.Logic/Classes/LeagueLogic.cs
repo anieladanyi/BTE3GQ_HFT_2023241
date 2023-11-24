@@ -5,6 +5,7 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using BTE3GQ_HFT_2023241.Logic.Interfaces;
+using System.Collections.Generic;
 
 namespace BTE3GQ_HFT_2023241.Logic.Classes
 {
@@ -60,9 +61,17 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
         public double AllTeamsAvgHeight()
         {
             return repo.ReadAll()
-           .SelectMany(league => league.Teams)
-           .SelectMany(team => team.Players)
-           .Average(player => player.Height);
+           .SelectMany(t => t.Teams)
+           .SelectMany(t => t.Players)
+           .Average(t => t.Height);
+        }
+
+        public List<League> LeageWithAgedPlayer(int age)
+        {
+            var league = repo.ReadAll()
+           .Where(t => t.Teams.Any(t => t.Players.Any(t => t.Age > age)))
+           .ToList();
+            return league;
         }
     }
 }
