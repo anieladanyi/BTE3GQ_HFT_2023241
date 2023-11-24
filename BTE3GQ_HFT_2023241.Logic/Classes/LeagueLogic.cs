@@ -71,6 +71,16 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
             var league = repo.ReadAll()
            .Where(t => t.Teams.Any(t => t.Players.Any(t => t.Age > age)))
            .ToList();
+
+            return league;
+        }
+
+        public List<League> LeaguesWithMostMidfielders()
+        {
+            var league = repo.ReadAll()
+            .Where(t => t.Teams.Any(t => t.Players.Any(t => t.Position == "M(C)")))
+            .ToList();
+
             return league;
         }
     }
