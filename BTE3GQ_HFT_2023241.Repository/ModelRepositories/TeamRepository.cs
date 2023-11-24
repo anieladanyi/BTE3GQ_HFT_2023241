@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BTE3GQ_HFT_2023241.Repository
 {
-    internal class TeamRepository : Repository<Team>, IRepository<Team>
+    public class TeamRepository : Repository<Team>, IRepository<Team>
     {
         public TeamRepository(Context ctx) : base(ctx)
         {

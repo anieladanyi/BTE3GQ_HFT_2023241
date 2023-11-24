@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BTE3GQ_HFT_2023241.Models
 {
@@ -14,6 +15,7 @@ namespace BTE3GQ_HFT_2023241.Models
         public int PlayerID { get; set; }
         [ForeignKey("TeamId")]
         public int TeamID { get; set; }
+        [JsonIgnore]
         public virtual Team Team { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }

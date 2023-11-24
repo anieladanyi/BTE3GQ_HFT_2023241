@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BTE3GQ_HFT_2023241.Client;
+using System.Text.Json.Serialization;
+//using BTE3GQ_HFT_2023241.Client;
 
 namespace BTE3GQ_HFT_2023241.Models
 {
@@ -18,8 +19,8 @@ namespace BTE3GQ_HFT_2023241.Models
         public bool CurrentUclParticipation { get; set; }
         public virtual ICollection<Player> Players { get; set; }
         public int LeagueID { get; set; }
+        [JsonIgnore]
         public virtual League League { get; set; }
-        public virtual UCL Ucl { get; set; }
         public int UclID { get; set; }
         public Team()
         {

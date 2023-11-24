@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BTE3GQ_HFT_2023241.Repository.ModelRepositories
 {
-    internal class LeagueRepository : Repository<League>, IRepository<League>
+    public class LeagueRepository : Repository<League>, IRepository<League>
     {
         public LeagueRepository(Context ctx) : base(ctx)
         {

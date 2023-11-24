@@ -1,5 +1,4 @@
-﻿using BTE3GQ_HFT_2023241.Client;
-using BTE3GQ_HFT_2023241.Models;
+﻿using BTE3GQ_HFT_2023241.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
@@ -16,7 +15,6 @@ namespace BTE3GQ_HFT_2023241.Repository
         public DbSet<Player> Players { get; set; }
         public DbSet<League> Leagues { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<UCL> UCLs { get; set; }
 
         public Context()
         {
@@ -34,7 +32,6 @@ namespace BTE3GQ_HFT_2023241.Repository
         {
             modelBuilder.Entity<Player>().HasOne(t => t.Team).WithMany(t => t.Players).HasForeignKey(t => t.TeamID);
             modelBuilder.Entity<Team>().HasOne(t => t.League).WithMany(t => t.Teams).HasForeignKey(t => t.LeagueID);
-            modelBuilder.Entity<Team>().HasOne(t => t.Ucl).WithMany(t => t.Teams).HasForeignKey(t => t.UclID);
 
             var france = new League("1,Ligue 1,France,2");
             var english = new League("2,Premier League,England,2");
@@ -51,7 +48,7 @@ namespace BTE3GQ_HFT_2023241.Repository
             var psg = new Team("1,PSG,4,1,1"); psg.UclID = 2;
             var manutd = new Team("2,Manchester United,3,2,2"); manutd.UclID = 4;
             var real = new Team("3,Real Madrid,4,3,1"); real.UclID = 3;
-            var bar = new Team("4,Barcelona,4,3,1"); 
+            var bar = new Team("4,Barcelona,4,3,1");
             var bay = new Team("5,Bayern München,2,4,1"); bay.UclID = 1;
             var newc = new Team("6,Newcastle,3,2,1");
             var dor = new Team("7,Borussia Dortmund,3,4,1");
@@ -135,59 +132,8 @@ namespace BTE3GQ_HFT_2023241.Repository
                 }
             }
 
-            var ucl = new UCL
-            {
-                Teams = uclteams,
-                UCLID = 1,
-                Winner = "sfd",
-                Year = 2000,
-            };
-
-
-            //var ucl1 = new UCL();
-            //ucl1.UCLID = 1;
-            //ucl1.Year = 2020;
-            //ucl1.Winner = "Bayern München";
-            //ucl1.Teams = uclteams;
-            //bay.Ucl = ucl1;
-
-            //var ucl2 = new UCL();
-            //ucl2.UCLID = 2;
-            //ucl1.Year = 2021;
-            //ucl1.Winner = "PSG";
-            //ucl1.Teams = uclteams;
-            //psg.Ucl = ucl2;
-
-            //var ucl3 = new UCL();
-            //ucl3.UCLID = 3;
-            //ucl1.Year = 2022;
-            //ucl1.Winner = "Real Madrid";
-            //ucl1.Teams = uclteams;
-            //real.Ucl = ucl3;
-
-            //var ucl4 = new UCL();
-            //ucl4.UCLID = 4;
-            //ucl1.Year = 2023;
-            //ucl1.Winner = "Manchester United";
-            //ucl1.Teams = uclteams;
-            //manutd.Ucl = ucl4;
-
-            //var ucl5 = new UCL();
-            //ucl5.UCLID = 5;
-            //ucl1.Year = 2024;
-            //ucl1.Winner = "-";
-            //ucl1.Teams = uclteams;
-            //real.Ucl = ucl5;
-
-            var ucllist = new List<UCL>();
-            ucllist.Add(ucl);
-            //ucllist.Add(ucl2);
-            //ucllist.Add(ucl3);
-            //ucllist.Add(ucl4);
-            //ucllist.Add(ucl5);
 
             modelBuilder.Entity<Player>().HasData(players);
-            modelBuilder.Entity<UCL>().HasData(ucllist);
             modelBuilder.Entity<League>().HasData(leagues);
             modelBuilder.Entity<Team>().HasData(teams);
 
