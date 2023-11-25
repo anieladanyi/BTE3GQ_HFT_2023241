@@ -83,5 +83,23 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
 
             return league;
         }
+
+        public List<Player> LeftOrRightFootedPlayers(string foot)
+        {
+            if (foot == "LEFT" || foot == "RIGHT" || foot == "BOTH")
+            {
+                 var footedplayer = repo.ReadAll()
+                .SelectMany(t => t.Teams)
+                .SelectMany(t => t.Players)
+                .Where(t => t.Foot == foot)
+                .ToList();
+                return footedplayer;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace Feleves
 
 
             //NON CRUD METÓDUSOKBÓL MÉG CSAK 2 VAN
+
+            //COMMITELJ!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
     }
 }
