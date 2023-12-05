@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Feleves
 {
-    class RestService
+    public class RestService
     {
         HttpClient client;
 
@@ -134,13 +134,12 @@ namespace Feleves
         {
             HttpResponseMessage response =
                 client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
-            ;
 
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-            //    throw new ArgumentException(error.Msg);
-            //}
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
 
             response.EnsureSuccessStatusCode();
         }
