@@ -24,6 +24,7 @@ namespace BTE3GQ_HFT_2023241.Models
         }
         public League(string info)
         {
+            Teams = new HashSet<Team>();
             string[] lines = info.Split(',');
             Id = int.Parse(lines[0]);
             Name = lines[1];

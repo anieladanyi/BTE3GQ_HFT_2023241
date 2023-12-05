@@ -20,21 +20,27 @@ namespace BTE3GQ_HFT_2023241.Test
         public void Init()
         {
             mockLeaguerepo = new Mock<IRepository<League>>();
+            var team = new Team("3,Real Madrid,4,3,1");
+            team.Players.Add(new Player("7,3,Thibaut Courtois,GK,199,LEFT,31"));
+            var league1 = new League("1, OTP Bank liga, Hungarian, 12");
+            league1.Teams.Add(team);
             mockLeaguerepo.Setup(x => x.ReadAll()).Returns(new List<League>()
             {
-                new League("1, OTP Bank liga, Hungarian, 12"),
-                new League("2, Eredvise, Hungarian, 12"),
+                league1,
+                new League("2, Eredvise, Netherland, 12"),
                 new League("3, OTP Bank liga, Hungarian, 12"),
                 new League("4, OTP Bank liga, Hungarian, 12"),
-
             }.AsQueryable());
             leaguelogic = new LeagueLogic(mockLeaguerepo.Object);
         }
         [Test]
         public void TeamWithOldestPlayersTest()
         {
-            Team team = leaguelogic.TeamWithOldestPlayers();
-            Assert.AreEqual(team, new Team("3,Real Madrid,4,3,1").UclID = 3);
+            string team = leaguelogic.TeamWithOldestPlayers().Name;
+            string name = "Real Madrid";
+            Assert.AreEqual(team, name);
         }
+
+        public
     }
 }

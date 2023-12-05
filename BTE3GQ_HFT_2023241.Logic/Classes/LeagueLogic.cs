@@ -50,6 +50,11 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
             repo.Update(item);
         }
 
+        public League IdOfLeague(int num)
+        {
+            return repo.ReadAll().FirstOrDefault();
+        }
+
         public Team TeamWithOldestPlayers()
         {
             return repo.ReadAll().SelectMany(t => t.Teams).

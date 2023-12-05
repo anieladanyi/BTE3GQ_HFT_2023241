@@ -29,6 +29,7 @@ namespace BTE3GQ_HFT_2023241.Models
 
         public Team(string info)
         {
+            Players = new HashSet<Player>();
             string[] split = info.Split(',');
             TeamID = int.Parse(split[0]);
             Name = split[1];

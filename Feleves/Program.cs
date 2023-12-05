@@ -19,6 +19,8 @@ namespace Feleves
 
             var item = logic.ReadAll();
             var team = logic.TeamWithOldestPlayers();
+            var height = logic.AllTeamsAvgHeight();
+            ;
             //var team = logic.TeamWithOldestPlayers();
 
 
