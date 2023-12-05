@@ -36,8 +36,16 @@ namespace Feleves
 
         static void Update(string entity)
         {
-            Console.WriteLine(entity + " update");
-            Console.ReadLine();
+            if (entity == "Player")
+            {
+                Console.WriteLine("Enter Player's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Player one = rest.Get<Player>(id, "player");
+                Console.WriteLine($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+                rest.Put(one, "player");
+            }
         }
 
         static void Delete(string entity)
