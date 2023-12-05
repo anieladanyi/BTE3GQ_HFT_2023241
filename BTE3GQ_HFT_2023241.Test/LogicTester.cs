@@ -24,7 +24,10 @@ namespace BTE3GQ_HFT_2023241.Test
             var team = new Team("3,Real Madrid,4,3,1");
             team.Players.Add(new Player("7,3,Thibaut Courtois,GK,199,LEFT,31"));
             var league1 = new League("1, OTP Bank liga, Hungarian, 12");
+            var team1 = new Team("1,PSG,3,2,1");
+            team1.Players.Add(new Player("5,1,Vitinha,M(C),179,LEFT,23"));
             league1.Teams.Add(team);
+            league1.Teams.Add(team1);
             mockLeaguerepo.Setup(x => x.ReadAll()).Returns(new List<League>()
             {
                 league1,
@@ -43,7 +46,7 @@ namespace BTE3GQ_HFT_2023241.Test
         [Test]
         public void AllTeamsAvgHeightTest()
         {
-            Assert.AreEqual(leaguelogic.AllTeamsAvgHeight(), 199);
+            Assert.AreEqual(leaguelogic.AllTeamsAvgHeight(), 189);
         }
         [Test]
         public void LeageWithAgedPlayerTest()
@@ -52,7 +55,20 @@ namespace BTE3GQ_HFT_2023241.Test
             string tem = list.First().Name;
             Assert.AreEqual(tem, " OTP Bank liga");
         }
+        [Test]
+        public void LeaguesWithMostMidfielders()
+        {
+            List<League> list = leaguelogic.LeaguesWithMostMidfielders();
+            string tem = list.First().Name;
+            Assert.AreEqual(tem, " OTP Bank liga");
+        }
 
-        public voi
+        [Test]
+        public void LeftOrRightFootedPlayersTest(string foot)
+        {
+            var list = leaguelogic.LeftOrRightFootedPlayers("LEFT");
+            string names = list.First().Name;
+            Assert.AreEqual(names, "Thibaut Courtois");
+        }
     }
 }
