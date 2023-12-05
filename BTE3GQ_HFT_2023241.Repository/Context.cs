@@ -122,15 +122,15 @@ namespace BTE3GQ_HFT_2023241.Repository
             players.Add(golovin);
             players.Add(dembele);
 
-            var uclteams = new List<Team>();
+            //var uclteams = new List<Team>();
 
-            foreach (var team in teams)
-            {
-                if (team.CurrentUclParticipation == true)
-                {
-                    uclteams.Add(team);
-                }
-            }
+            //foreach (var team in teams)
+            //{
+            //    if (team.CurrentUclParticipation == true)
+            //    {
+            //        uclteams.Add(team);
+            //    }
+            //}
 
 
             modelBuilder.Entity<Player>().HasData(players);

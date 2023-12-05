@@ -30,15 +30,15 @@ namespace Feleves
                 .Add("Update", () => cr.Update<Team>())
                 .Add("Exit", ConsoleMenu.Close);
 
-            //var leagueSubMenu = new ConsoleMenu(args, level: 1)
-            //    .Add("List", () => List("League"))
-            //    .Add("Create", () => Create("League"))
-            //    .Add("Delete", () => Delete("League"))
-            //    .Add("Update", () => Update("League"))
-            //    .Add("Exit", ConsoleMenu.Close);
+            var leagueSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("List", () => cr.List<League>())
+                .Add("Create", () => cr.Create<League>())
+                .Add("Delete", () => cr.Delete<League>())
+                .Add("Update", () => cr.Update<League>())
+                .Add("Exit", ConsoleMenu.Close);
 
             var menu = new ConsoleMenu(args, level: 0)
-                //.Add("Leagues", () => leagueSubMenu.Show())
+                .Add("Leagues", () => leagueSubMenu.Show())
                 .Add("Teams", () => teamSubMenu.Show())
                 .Add("Players", () => playerSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
