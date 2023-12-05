@@ -9,9 +9,15 @@ namespace Feleves
 {
     internal class Program
     {
+        static RestService rest;
         static void Create(string entity)
         {
-            Console.WriteLine(entity + " create");
+            if (entity == "Player")
+            {
+                Console.WriteLine("Enter Player Name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Player { })
+            }
             Console.ReadLine();
         }
 
@@ -19,11 +25,10 @@ namespace Feleves
         {
             if (entity == "Player")
             {
-                var items = playerlogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
+                List<Player> players = rest.Get<Player>("player");
+                foreach (var item in players)
                 {
-                    Console.WriteLine(item.PlayerID + "\t" + item.Name);
+                    Console.WriteLine(item.Name);
                 }
             }
             Console.ReadLine();
@@ -42,6 +47,7 @@ namespace Feleves
         }
         static void Main(string[] args)
         {
+            rest = new RestService("http://localhost:26594/", "League");
 
             var playerSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Player"))
