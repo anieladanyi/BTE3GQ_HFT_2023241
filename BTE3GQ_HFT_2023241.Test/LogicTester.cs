@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Moq;
+using static System.Net.WebRequestMethods;
 
 namespace BTE3GQ_HFT_2023241.Test
 {
@@ -28,8 +29,7 @@ namespace BTE3GQ_HFT_2023241.Test
             {
                 league1,
                 new League("2, Eredvise, Netherland, 12"),
-                new League("3, OTP Bank liga, Hungarian, 12"),
-                new League("4, OTP Bank liga, Hungarian, 12"),
+                new League("3, SPL, Saudi Arabian, 12")
             }.AsQueryable());
             leaguelogic = new LeagueLogic(mockLeaguerepo.Object);
         }
@@ -40,7 +40,19 @@ namespace BTE3GQ_HFT_2023241.Test
             string name = "Real Madrid";
             Assert.AreEqual(team, name);
         }
+        [Test]
+        public void AllTeamsAvgHeightTest()
+        {
+            Assert.AreEqual(leaguelogic.AllTeamsAvgHeight(), 199);
+        }
+        [Test]
+        public void LeageWithAgedPlayerTest()
+        {
+            List<League> list = leaguelogic.LeageWithAgedPlayer(30);
+            string tem = list.First().Name;
+            Assert.AreEqual(tem, " OTP Bank liga");
+        }
 
-        public
+        public voi
     }
 }
