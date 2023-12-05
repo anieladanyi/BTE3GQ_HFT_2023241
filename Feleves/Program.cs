@@ -28,7 +28,7 @@ namespace Feleves
                 List<Player> players = rest.Get<Player>("player");
                 foreach (var item in players)
                 {
-                    Console.WriteLine(item.Name);
+                    Console.WriteLine(item.PlayerID + ": " + item.Name);
                 }
             }
             Console.ReadLine();
