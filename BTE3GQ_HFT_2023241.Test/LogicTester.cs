@@ -16,11 +16,15 @@ namespace BTE3GQ_HFT_2023241.Test
     public class LogicTester
     {
         LeagueLogic leaguelogic;
+        TeamLogic teamlogic;
         Mock<IRepository<League>> mockLeaguerepo;
+        Mock<IRepository<Team>> mockTeamrepo;
+
         [SetUp]
         public void Init()
         {
             mockLeaguerepo = new Mock<IRepository<League>>();
+            mockTeamrepo = new Mock<IRepository<Team>>();
             var team = new Team("3,Real Madrid,4,3,1");
             team.Players.Add(new Player("7,3,Thibaut Courtois,GK,199,LEFT,31"));
             var league1 = new League("1, OTP Bank liga, Hungarian, 12");
@@ -35,6 +39,13 @@ namespace BTE3GQ_HFT_2023241.Test
                 new League("3, SPL, Saudi Arabian, 12")
             }.AsQueryable());
             leaguelogic = new LeagueLogic(mockLeaguerepo.Object);
+            Team b = (new Team("3,Real Madrid,4,3,1"));
+            mockTeamrepo.Setup(x => x.ReadAll()).Returns(new List<Team>()
+            {
+                b,
+                new Team("1,PSG,3,2,1")
+            }.AsQueryable());
+            teamlogic = new TeamLogic(mockTeamrepo.Object);
         }
         [Test]
         public void TeamWithOldestPlayersTest()
@@ -64,11 +75,58 @@ namespace BTE3GQ_HFT_2023241.Test
         }
 
         [Test]
-        public void LeftOrRightFootedPlayersTest(string foot)
+        public void TallestPlayersAgeTest()
         {
-            var list = leaguelogic.LeftOrRightFootedPlayers("LEFT");
-            string names = list.First().Name;
-            Assert.AreEqual(names, "Thibaut Courtois");
+            int age = leaguelogic.TheTallestPlayersAge();
+            Assert.That(age, Is.EqualTo(31));
+        }
+        [Test]
+        public void CreateLeagueTestWithIncorrectCapacity()
+        {
+            var league = new League() { LeaguesCapacity = 0 };
+            try
+            {
+                leaguelogic.Create(league);
+            }
+            catch 
+            {
+            }
+
+            mockLeaguerepo.Verify(r => r.Create(league), Times.Never);
+        }
+        [Test]
+        public void CreateLeagueTestWithCorrectCapacity()
+        {
+            var league = new League() { LeaguesCapacity = 2 };
+            leaguelogic.Create(league);
+            mockLeaguerepo.Verify(r => r.Create(league), Times.Once);
+        }
+        [Test]
+        public void CreateTeamTestWithIncorrectCapacity()
+        {
+            var team = new Team() { SquadDepth = 1 };
+            try
+            {
+                teamlogic.Create(team);
+            }
+            catch
+            {
+            }
+            mockTeamrepo.Verify(r => r.Create(team), Times.Never);
+        }
+        [Test]
+        public void CreateTeamTestWithCorrectCapacity()
+        {
+            var team = new Team() { SquadDepth = 4 };
+            teamlogic.Create(team);
+            mockTeamrepo.Verify(r => r.Create(team), Times.Once);
+        }
+
+        [Test]
+        public void SmallestPlayerAgeTest()
+        {
+            int age = leaguelogic.TheSmallestPlayersAge();
+            Assert.That(age, Is.EqualTo(23));
         }
     }
 }

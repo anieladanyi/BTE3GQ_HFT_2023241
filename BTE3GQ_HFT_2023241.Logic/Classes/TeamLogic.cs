@@ -50,5 +50,11 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
             repo.Update(item);
         }
 
+        public Player PlayerById(int id)
+        {
+            var player = repo.ReadAll().SelectMany(team => team.Players)
+             .FirstOrDefault(player => player.PlayerID == id);
+            return player;
+        }
     }
 }

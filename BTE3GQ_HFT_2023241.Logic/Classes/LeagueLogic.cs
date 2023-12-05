@@ -10,7 +10,7 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
 {
     public class LeagueLogic : ILeagueLogic
     {
-        
+
         IRepository<League> repo;
 
         public LeagueLogic(IRepository<League> repo)
@@ -50,11 +50,6 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
             repo.Update(item);
         }
 
-        public League IdOfLeague(int num)
-        {
-            return repo.ReadAll().FirstOrDefault();
-        }
-
         public Team TeamWithOldestPlayers()
         {
             return repo.ReadAll().SelectMany(t => t.Teams).
@@ -87,23 +82,35 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
 
             return league;
         }
-
-        public List<Player> LeftOrRightFootedPlayers(string foot)
+        public int TheTallestPlayersAge()
         {
-            if (foot == "LEFT" || foot == "RIGHT" || foot == "BOTH")
-            {
-                 var footedplayer = repo.ReadAll()
-                .SelectMany(t => t.Teams)
-                .SelectMany(t => t.Players)
-                .Where(t => t.Foot == foot)
-                .ToList();
-                return footedplayer;
-            }
-            else
-            {
-                return null;
-            }
+            var tallestplayersage = repo.ReadAll()
+            .SelectMany(t => t.Teams)
+            .SelectMany(t => t.Players)
+            .Where(t => t.Height == repo.ReadAll()
+            .SelectMany(t => t.Teams)
+            .SelectMany(t => t.Players)
+            .Max(t => t.Height))
+            .Select(t => t.Age)
+            .FirstOrDefault();
 
+            return tallestplayersage;
+        }
+
+        public int TheSmallestPlayersAge()
+        {
+
+            var smallestplayerage = repo.ReadAll()
+            .SelectMany(t => t.Teams)
+            .SelectMany(t => t.Players)
+            .Where(t => t.Height == repo.ReadAll()
+            .SelectMany(t => t.Teams)
+            .SelectMany(t => t.Players)
+            .Min(t => t.Height))
+            .Select(t => t.Age)
+            .FirstOrDefault();
+
+            return smallestplayerage;
         }
     }
 }

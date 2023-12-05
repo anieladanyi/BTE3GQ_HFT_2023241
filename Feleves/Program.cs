@@ -15,19 +15,16 @@ namespace Feleves
             
             var items = context.Players.ToArray();
             var repo = new LeagueRepository(context);
+            var repo1 = new TeamRepository(context);
             var logic = new LeagueLogic(repo);
+            var logict = new TeamLogic(repo1);
 
             var item = logic.ReadAll();
             var team = logic.TeamWithOldestPlayers();
             var height = logic.AllTeamsAvgHeight();
             var lig = logic.LeageWithAgedPlayer(30);
+            var player = logict.PlayerById(1);
             ;
-            //var team = logic.TeamWithOldestPlayers();
-
-
-            //NON CRUD METÓDUSOKBÓL MÉG CSAK 2 VAN
-
-            //COMMITELJ!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
     }
 }
