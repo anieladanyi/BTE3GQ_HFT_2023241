@@ -50,8 +50,12 @@ namespace Feleves
 
         static void Delete(string entity)
         {
-            Console.WriteLine(entity + " delete");
-            Console.ReadLine();
+            if (entity == "Player")
+            {
+                Console.WriteLine("Enter Player's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "player");
+            }
         }
         static void Main(string[] args)
         {
