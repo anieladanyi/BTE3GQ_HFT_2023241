@@ -16,7 +16,7 @@ namespace Feleves
             {
                 Console.WriteLine("Enter Player Name: ");
                 string name = Console.ReadLine();
-                rest.Post(new Player { })
+                rest.Post(new Player { Name = name }, "player");
             }
             Console.ReadLine();
         }
