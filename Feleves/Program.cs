@@ -14,10 +14,11 @@ namespace Feleves
             Context context = new Context();
             
             var items = context.Players.ToArray();
-            var repo = new PlayerRepository(context);
-            var logic = new PlayerLogic(repo);
+            var repo = new LeagueRepository(context);
+            var logic = new LeagueLogic(repo);
 
             var item = logic.ReadAll();
+            var team = logic.TeamWithOldestPlayers();
             //var team = logic.TeamWithOldestPlayers();
 
 

@@ -6,12 +6,11 @@ using System.IO;
 using System.Linq;
 using BTE3GQ_HFT_2023241.Logic.Interfaces;
 using System.Collections.Generic;
-
 namespace BTE3GQ_HFT_2023241.Logic.Classes
 {
     public class LeagueLogic : ILeagueLogic
     {
-
+        
         IRepository<League> repo;
 
         public LeagueLogic(IRepository<League> repo)
