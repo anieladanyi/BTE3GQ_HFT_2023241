@@ -1,4 +1,5 @@
 ﻿using BTE3GQ_HFT_2023241.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BTE3GQ_HFT_2023241.Logic.Interfaces
@@ -12,5 +13,9 @@ namespace BTE3GQ_HFT_2023241.Logic.Interfaces
         IQueryable<League> ReadAll();
         Team TeamWithOldestPlayers();
         void Update(League item);
+        List<League> LeageWithAgedPlayer(int age);
+        List<League> LeaguesWithMostMidfielders();
+        int TheTallestPlayersAge();
+        int TheSmallestPlayersAge();
     }
 }

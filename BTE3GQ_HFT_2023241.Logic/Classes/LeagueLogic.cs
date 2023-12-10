@@ -99,7 +99,6 @@ namespace BTE3GQ_HFT_2023241.Logic.Classes
 
         public int TheSmallestPlayersAge()
         {
-
             var smallestplayerage = repo.ReadAll()
             .SelectMany(t => t.Teams)
             .SelectMany(t => t.Players)

@@ -48,5 +48,10 @@ namespace BTE3GQHFT_2023241.Endpoint.Controllers
         {
             this.logic.Delete(id);
         }
+        [HttpGet("PlayerById")]
+        public Player PlayerById(int id)
+        {
+            return this.logic.PlayerById(id);
+        }
     }
 }

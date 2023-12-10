@@ -36,7 +36,7 @@ namespace BTE3GQHFT_2023241.Endpoint.Controllers
         }
 
         [HttpPut]
-        public void Update( [FromBody] League value)
+        public void Update([FromBody] League value)
         {
             this.logic.Update(value);
         }
@@ -45,6 +45,36 @@ namespace BTE3GQHFT_2023241.Endpoint.Controllers
         public void Delete(int id)
         {
             this.logic.Delete(id);
+        }
+        [HttpGet("TeamWithOldestPlayers")]
+        public Team TeamWithOldestPlayers()
+        {
+           return this.logic.TeamWithOldestPlayers();
+        }
+        [HttpGet("AllTeamsAvgHeight")]
+        public double AllTeamsAvgHeight()
+        {
+            return this.logic.AllTeamsAvgHeight();
+        }
+        [HttpGet("LeageWithAgedPlayer")]
+        public List<League> LeageWithAgedPlayer(int age)
+        {
+            return this.logic.LeageWithAgedPlayer(age);
+        }
+        [HttpGet("LeaguesWithMostMidfielders")]
+        public List<League> LeaguesWithMostMidfielders()
+        {
+            return this.logic.LeaguesWithMostMidfielders();
+        }
+        [HttpGet("TheTallestPlayersAge")]
+        public int TheTallestPlayersAge()
+        {
+            return this.logic.TheTallestPlayersAge();
+        }
+        [HttpGet("TheSmallestPlayersAge")]
+        public int TheSmallestPlayersAge()
+        { 
+            return this.logic.TheSmallestPlayersAge();
         }
     }
 }

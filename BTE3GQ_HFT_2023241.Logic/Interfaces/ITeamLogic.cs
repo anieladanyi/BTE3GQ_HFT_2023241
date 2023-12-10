@@ -10,5 +10,6 @@ namespace BTE3GQ_HFT_2023241.Logic.Interfaces
         Team Read(int id);
         IQueryable<Team> ReadAll();
         void Update(Team item);
+        Player PlayerById(int id);
     }
 }
